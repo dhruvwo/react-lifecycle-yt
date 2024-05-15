@@ -1,24 +1,28 @@
 import "./App.css";
-import CalculateWithMemo from "./components/CalculateWithMemo/CalculateWithMemo";
-import ExampleWithRender from "./components/ExampleWithRender";
-import LongList from "./components/LongList/LongList";
-// import ReactRouterDomDemo from "./components/ReactRouterDomDemo/ReactRouterDomDemo";
-// import { AuthProvider } from "./contexts/AuthProvider";
-// import LongList from "./components/LongList/LongList";
-// import LifeCycleConcept from "./components/LifecycleConcept/LifeCycleConcept";
-import ContextDemo from "./components/ContextDemo/ContextDemo";
-import ReduxDemo from "./components/ReduxDemo/ReduxDemo";
+import LifeCycleConcept from "./components/LifecycleConcept/LifeCycleConcept";
 import { ThemeProvider } from "./contexts/ThemeProvider";
-import { useEffect, useLayoutEffect } from "react";
+import { useEffect, useLayoutEffect, useMemo, useState } from "react";
 
 function App() {
-  console.log("***************App rerendering...");
+  console.log("RENDERING COMPONENT App...");
+  const [users, setUsers] = useState([
+    {
+      name: "Initial User",
+      id: 123,
+    },
+  ]);
   useEffect(() => {
-    console.log("use effect in app");
-  }, []);
+    console.log("HOOK => App => useEffect");
+  }, [users]);
   useLayoutEffect(() => {
-    console.log("use layoutt effect in app");
-  }, []);
+    console.log("HOOK => App => useLayoutEffect");
+  }, [users]);
+
+  const test = useMemo(() => {
+    console.log("HOOK => App => useMemo => test");
+    return [];
+  }, [users]);
+
   return (
     <div
       style={{
@@ -28,15 +32,7 @@ function App() {
       }}
     >
       <ThemeProvider>
-        {/* <ExampleWithRender /> */}
-        {/* <CalculateWithMemo /> */}
-        {/* <LifeCycleConcept /> */}
-        {/* <LongList /> */}
-        {/* <ContextDemo /> */}
-        <ReduxDemo />
-        {/* <AuthProvider>
-          <ReactRouterDomDemo />
-        </AuthProvider> */}
+        <LifeCycleConcept setUsers={setUsers} users={users} />
       </ThemeProvider>
     </div>
   );

@@ -4,42 +4,32 @@ import {
   useLayoutEffect,
   useMemo,
   useRef,
-  useState,
 } from "react";
 import UserNames from "../CalculateWithMemo/Users";
 import { generateRandomId, getNewName } from "../../services/common";
 
-export default function LifeCycleConcept() {
-  console.log("***************LifeCycleConcept rerendering...");
+export default function LifeCycleConcept({ users, setUsers }) {
+  console.log("RENDERING COMPONENT LifeCycleConcept...");
   const myDiv = useRef();
-  const [users, setUsers] = useState([
-    {
-      name: "Initial User",
-      id: 123,
-    },
-  ]);
 
   useEffect(() => {
-    myDiv.current.style.backgroundColor = "red";
-    console.log("useEffect => called");
-  }, []);
+    console.log("HOOK => LifeCycleConcept => useEffect");
+    return () => {
+      console.log("HOOK => LifeCycleConcept => useEffect => return");
+    };
+  }, [users]);
 
   useLayoutEffect(() => {
-    myDiv.current.style.backgroundColor = "green";
-    console.log("useLayoutEffect => called");
-  }, []);
-
-  useEffect(() => {
-    console.log("useEffect => users rerendering", users);
+    console.log("HOOK => LifeCycleConcept => useLayoutEffect");
   }, [users]);
 
   const userNames = useMemo(() => {
-    console.log("useMemo => userNames called");
+    console.log("HOOK => LifeCycleConcept => useMemo => userNames");
     return users.map((user) => user.name).join(", ");
   }, [users]);
 
   const addUser = useCallback(() => {
-    console.log("useCallback => addUser called");
+    console.log("HOOK => LifeCycleConcept => useCallback => addUser");
     const userName = getNewName();
     const userId = generateRandomId();
     setUsers((prev) => [
