@@ -13,14 +13,23 @@ export default function LifeCycleConcept({ users, setUsers }) {
   const myDiv = useRef();
 
   useEffect(() => {
-    console.log("HOOK => LifeCycleConcept => useEffect");
+    console.log("HOOK => LifeCycleConcept => useEffect", users?.length);
     return () => {
-      console.log("HOOK => LifeCycleConcept => useEffect => return");
+      console.log(
+        "HOOK => LifeCycleConcept => useEffect => return",
+        users?.length
+      );
     };
   }, [users]);
 
   useLayoutEffect(() => {
-    console.log("HOOK => LifeCycleConcept => useLayoutEffect");
+    console.log("HOOK => LifeCycleConcept => useLayoutEffect", users?.length);
+    return () => {
+      console.log(
+        "HOOK => LifeCycleConcept => useLayoutEffect => return",
+        users?.length
+      );
+    };
   }, [users]);
 
   const userNames = useMemo(() => {
