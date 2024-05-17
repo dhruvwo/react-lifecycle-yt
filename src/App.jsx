@@ -11,9 +11,11 @@ function App() {
       id: 123,
     },
   ]);
+  
   useEffect(() => {
     console.log("HOOK => App => useEffect");
   }, [users]);
+
   useLayoutEffect(() => {
     console.log("HOOK => App => useLayoutEffect");
   }, [users]);

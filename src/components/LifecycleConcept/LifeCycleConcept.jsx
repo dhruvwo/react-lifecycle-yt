@@ -48,7 +48,7 @@ export default function LifeCycleConcept({ users, setUsers }) {
         name: userName,
       },
     ]);
-  }, []);
+  }, [setUsers]);
 
   return (
     <div
